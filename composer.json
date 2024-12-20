@@ -1,0 +1,14 @@
+{
+    "name": "itc/itc-acf-mui-page-builder",
+    "version": "0.0.1",
+    "description": "Enable page builder field",
+    "type": "wordpress-plugin",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "YAO YINGYING",
+            "email": "yao.yingying@it-consultis.net"
+        }
+    ],
+    "require": {}
+}
