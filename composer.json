@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Enable page builder field",
     "type": "wordpress-plugin",
-    "license": "GPLv3",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "YAO YINGYING",
