@@ -17,14 +17,14 @@ require_once __DIR__ . '/MuiPageBuilderConfigManager.php';
 require_once __DIR__ . '/MuiPageBuilderMediaLibrary.php';
 require_once __DIR__ . '/MuiPageBuilderAutocomplete.php';
 require_once __DIR__ . '/MuiPageBuilderFilebird.php';
-require_once __DIR__ . '/MuiPageBuilderRevisions.php';
+
 
 global $wpdb;
 $config_manager = new MuiPageBuilderConfigManager($wpdb);
 $mui_media_library = new MuiPageBuilderMediaLibrary($wpdb);
 $mui_autocomplete = new MuiPageBuilderAutocomplete($wpdb);
 $mui_filebird = new MuiPageBuilderFilebird();
-$mui_revisions = new MuiPageBuilderRevisions();
+
 
 add_action('admin_notices', function () {
 
@@ -47,6 +47,21 @@ add_action('init', function () {
     if (is_admin()) {
         require_once __DIR__ . '/MuiPageBuilderSettingsPage.php';
         new MuiPageBuilderSettingsPage();
+
+        require_once __DIR__ . '/MuiPageBuilderRevisions.php';
+        new MuiPageBuilderRevisions();
+
+        add_filter( 'screen_layout_columns', function ($columns) {
+            $columns['post'] = 1;
+            return $columns;
+        } );
+
+        add_action( 'admin_enqueue_scripts', function(){
+            wp_enqueue_style( 'acf-mui-page-builder',
+            plugin_dir_url( __FILE__ ) . '/css/acf-mui-page-builder.css' ,
+            false,
+            '1.0.0' );
+        } );
     }
 });
 
