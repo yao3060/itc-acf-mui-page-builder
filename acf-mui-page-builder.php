@@ -51,17 +51,22 @@ add_action('init', function () {
         require_once __DIR__ . '/MuiPageBuilderRevisions.php';
         new MuiPageBuilderRevisions();
 
-        add_filter( 'screen_layout_columns', function ($columns) {
-            $columns['post'] = 1;
-            return $columns;
-        } );
-
         add_action( 'admin_enqueue_scripts', function(){
             wp_enqueue_style( 'acf-mui-page-builder',
             plugin_dir_url( __FILE__ ) . '/css/acf-mui-page-builder.css' ,
             false,
             '1.0.0' );
         } );
+
+        // disable `page` revisions
+        add_filter( 'wp_page_revisions_to_keep',  fn () => 0);
+
+        // show 1 column in `page` editor page
+        add_filter('screen_layout_columns', function($columns) {
+            $columns['page'] = 1;
+            return $columns;
+        });
+        add_filter('get_user_option_screen_layout_page', fn() => 1 );
     }
 });
 
