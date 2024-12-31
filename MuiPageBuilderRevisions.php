@@ -4,7 +4,7 @@ class MuiPageBuilderRevisions {
 
     const BLOCKS_META_KEY = 'blocks';
 
-    public $revision_prefix = self::BLOCKS_META_KEY . ':revisions:';
+    public $revision_prefix = "_" . self::BLOCKS_META_KEY . ':revisions:';
 
     public function __construct() {
         add_action('acf/save_post', $this->add_revisions_on_save(...), 5);
@@ -18,7 +18,7 @@ class MuiPageBuilderRevisions {
         $prev_blocks = get_field( self::BLOCKS_META_KEY, $post_id );
             if($prev_blocks) {
                 $user = wp_get_current_user();
-                update_post_meta($post_id, "{$this->revision_prefix}{$user->display_name}:{$user->ID}:" . time(), $prev_blocks);
+                update_post_meta($post_id, "{$this->revision_prefix}{$user->user_login}:{$user->ID}:" . time(), $prev_blocks);
             }
     }
 
